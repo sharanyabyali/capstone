@@ -1,6 +1,6 @@
 # EduMentor AI: A Multi-Agent Personalized Learning Assistant
 
-EduMentor AI is a state-of-the-art, high-fidelity multi-agent tutoring platform designed to deliver personalized, Socratic-guided education. Built entirely as a premium Single Page Application (SPA) using HTML, CSS, and Vanilla JavaScript, it provides an immersive, interactive study workspace to maximize long-term concept comprehension.
+> EduMentor AI is a glassmorphic multi-agent learning platform featuring a Study Planner Agent for custom roadmaps, Socratic Tutor chat, Quiz evaluations, and a Pomodoro Focus Sanctuary with synthesized ambient binaural/rain soundscapes. Integrates live Gemini models and supports automated CI/CD static deployments to GitHub Pages.
 
 ---
 
