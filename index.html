@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduMentor AI - Multi-Agent Personalized Learning Assistant</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-logo">E</div>
+        <div class="brand-name">EduMentor AI</div>
+      </div>
+      
+      <nav class="nav-links">
+        <a class="nav-item active" data-view="dashboard">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z"/></svg>
+          Dashboard
+        </a>
+        <a class="nav-item" data-view="planner">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+          Curriculum Planner
+        </a>
+        <a class="nav-item" data-view="chat">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+          Socratic Mentor
+        </a>
+        <a class="nav-item" data-view="flashcards">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+          Flashcards
+        </a>
+        <a class="nav-item" data-view="focus">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Focus Sanctuary
+        </a>
+        <a class="nav-item" data-view="quiz">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+          Quiz Arena
+        </a>
+        <a class="nav-item" data-view="analytics">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          Analytics
+        </a>
+        <a class="nav-item" data-view="settings">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Settings
+        </a>
+      </nav>
+      
+      <!-- User Widget -->
+      <div class="user-widget">
+        <div class="avatar-container">
+          <div class="avatar" id="widget-avatar">S</div>
+          <span class="level-badge" id="widget-level">Lv 1</span>
+        </div>
+        <div class="user-info">
+          <span class="user-name">Scholar</span>
+          <span class="user-xp" id="widget-xp-text">0 / 100 XP</span>
+          <div class="xp-progress-bar">
+            <div class="xp-fill" id="widget-xp-fill"></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main View Window -->
+    <main class="main-content">
+      
+      <!-- 1. DASHBOARD VIEW -->
+      <div id="view-dashboard" class="view-panel active">
+        <header class="view-header">
+          <h1 class="view-title">Welcome back, Scholar!</h1>
+          <p class="view-subtitle">Ready to continue your customized multi-agent education journey?</p>
+        </header>
+        
+        <div class="dashboard-grid">
+          <div class="dashboard-left">
+            <!-- Welcome Hero Box -->
+            <div class="glass-card welcome-hero">
+              <div class="welcome-info">
+                <h2>Build Your Focus & Mastery</h2>
+                <p>EduMentor matches you with specialized AI Agents. Track your metrics, test your knowledge in the Quiz Arena, and memorize with spaced-repetition flashcards.</p>
+              </div>
+              <svg class="welcome-hero-img" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.663 17h4.673M12 3v1m6.364 .364l-.707 .707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            </div>
+            
+            <!-- Active Customized Courses -->
+            <div class="section-header">
+              <span>Active Roadmaps</span>
+              <button class="btn btn-secondary" onclick="app.switchView('planner')">Create New +</button>
+            </div>
+            
+            <div class="active-courses" id="active-courses-list">
+              <!-- Dynamically populated -->
+            </div>
+            
+            <!-- Course Library / Quick Add -->
+            <div class="section-header">
+              <span>Quick Start Courses</span>
+            </div>
+            <div class="active-courses">
+              <div class="glass-card course-card">
+                <div class="course-meta">
+                  <span class="badge-pill level">Beginner</span>
+                  <span class="badge-pill style">Practical</span>
+                </div>
+                <h3 class="course-title">Intro to Python</h3>
+                <p class="course-desc">Start coding from scratch. Master syntax, types, loops, and reusable functional blocks.</p>
+                <button class="btn" onclick="app.quickStartCourse('python')">Initialize Roadmap</button>
+              </div>
+              
+              <div class="glass-card course-card">
+                <div class="course-meta">
+                  <span class="badge-pill level">Advanced</span>
+                  <span class="badge-pill style">Theoretical</span>
+                </div>
+                <h3 class="course-title">Quantum Computing</h3>
+                <p class="course-desc">Understand physical qubits, math superposition representation, and measurement mechanics.</p>
+                <button class="btn" onclick="app.quickStartCourse('quantum')">Initialize Roadmap</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="dashboard-right">
+            <!-- Daily Quests -->
+            <div class="glass-card">
+              <h3 class="section-header" style="margin-bottom: 8px;">Daily Quests</h3>
+              <p class="view-subtitle" style="font-size: 0.8rem; margin-bottom: 12px;">Complete challenges to level up!</p>
+              
+              <div class="quest-list" id="quest-list-container">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+            
+            <!-- Study Streak Metrics -->
+            <div class="glass-card" style="margin-top: 24px; text-align: center;">
+              <h3 class="metric-label" style="font-size: 0.9rem; margin-bottom: 12px;">Current Study Streak</h3>
+              <div class="metric-value" style="font-size: 3.5rem;" id="streak-count-value">3</div>
+              <p class="view-subtitle" style="font-size: 0.8rem; color: var(--accent-emerald);">🔥 Days Active in a Row!</p>
+            </div>
+
+            <!-- Agent Activity Panel -->
+            <div class="glass-card" style="margin-top: 24px;">
+              <h3 class="section-header" style="margin-bottom: 8px;">Agent Activity</h3>
+              <p class="view-subtitle" style="font-size: 0.8rem; margin-bottom: 12px;">Real-time logs from specialized agents.</p>
+              <div class="quest-list" id="agent-activity-container">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 2. CURRICULUM PLANNER VIEW -->
+      <div id="view-planner" class="view-panel">
+        <header class="view-header">
+          <h1 class="view-title">Curriculum Planner Agent</h1>
+          <p class="view-subtitle">Define your goals, and let our Planner Agent build a custom structured pathway.</p>
+        </header>
+        
+        <div class="planner-layout">
+          <div class="glass-card setup-form">
+            <h3 class="section-header" style="margin-bottom: 8px;">Roadmap Criteria</h3>
+            
+            <div class="form-group">
+              <label class="form-label" for="planner-topic">What do you want to learn?</label>
+              <input type="text" id="planner-topic" class="form-input" placeholder="e.g. Machine Learning, Silk Road, Quantum Theory...">
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Current Experience level</label>
+              <div class="selector-grid" id="planner-level">
+                <div class="selector-option selected" data-value="Beginner">Beginner</div>
+                <div class="selector-option" data-value="Intermediate">Intermediate</div>
+                <div class="selector-option" data-value="Advanced">Advanced</div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Preferred Learning Style</label>
+              <div class="selector-grid" id="planner-style">
+                <div class="selector-option selected" data-value="Practical">Practical</div>
+                <div class="selector-option" data-value="Theoretical">Theoretical</div>
+                <div class="selector-option" data-value="Visual">Visual</div>
+              </div>
+            </div>
+            
+            <button class="btn" style="width: 100%; margin-top: 10px;" id="generate-roadmap-btn" onclick="app.generateCustomCurriculum()">
+              <svg fill="none" stroke="currentColor" style="width:16px;" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              Compose Roadmap
+            </button>
+          </div>
+          
+          <div class="glass-card timeline-card" id="timeline-card-wrapper">
+            <div class="timeline-placeholder" id="timeline-placeholder-content">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              <h3>No Roadmap Active</h3>
+              <p style="margin-top: 8px;">Fill in the form on the left or select a Quick Start course on the Dashboard to deploy a learning agent.</p>
+            </div>
+            
+            <div class="hidden" id="timeline-content">
+              <div class="roadmap-header">
+                <div class="course-meta">
+                  <span class="badge-pill level" id="timeline-level-badge">Beginner</span>
+                  <span class="badge-pill style" id="timeline-style-badge">Practical</span>
+                </div>
+                <h2 class="view-title" id="timeline-course-title" style="font-size: 1.5rem; margin-bottom: 4px;">Python Programming</h2>
+                <p class="view-subtitle" id="timeline-course-desc" style="font-size: 0.85rem;">Learn basic concepts...</p>
+              </div>
+              
+              <div class="roadmap-timeline" id="timeline-modules-list">
+                <!-- Modules & lessons go here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- ACTIVE LESSON READER VIEWS (Hidden unless studying) -->
+      <div id="view-reader" class="view-panel">
+        <header class="view-header" style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-end;">
+          <div>
+            <a href="#" onclick="app.switchView('planner')" style="color: var(--accent-cyan); font-size: 0.85rem; text-decoration: none; display: flex; align-items: center; gap: 4px; margin-bottom: 8px;">
+              ← Back to Timeline
+            </a>
+            <h1 class="view-title" id="reader-lesson-title" style="font-size: 1.8rem;">Variables & Data Types</h1>
+            <p class="view-subtitle" id="reader-course-title">Introduction to Python Programming</p>
+          </div>
+          <div class="course-meta">
+            <button class="btn btn-secondary" onclick="app.startFocusSanctuary()">
+              Focus Sanctuary
+            </button>
+            <button class="btn" onclick="app.startQuizForActiveLesson()">
+              Take Quiz
+            </button>
+          </div>
+        </header>
+        
+        <div class="lesson-reader-container">
+          <!-- Left: Lesson Text Material -->
+          <div class="glass-card reader-panel">
+            <div class="reader-body" id="reader-content-body">
+              <!-- Dynamically populated HTML content -->
+            </div>
+            <div class="reader-footer">
+              <button class="btn btn-secondary" id="reader-prev-btn">Previous Lesson</button>
+              <button class="btn" id="reader-next-btn">Next Lesson</button>
+            </div>
+          </div>
+          
+          <!-- Right: Embedded Socratic Dialogue -->
+          <div class="glass-card chat-panel">
+            <div class="section-header" style="border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 12px;">
+              <span>Socratic Mentor</span>
+              <span class="badge-pill style" style="background: rgba(139, 92, 246, 0.15); color: var(--accent-violet);">Guiding Agent</span>
+            </div>
+            
+            <div class="chat-messages" id="reader-chat-messages">
+              <!-- Bubbles go here -->
+            </div>
+            
+            <div class="chat-input-area">
+              <input type="text" id="reader-chat-input" class="chat-input" placeholder="Type a message..." onkeydown="if(event.key === 'Enter') app.sendSocraticMessage()">
+              <button class="btn" onclick="app.sendSocraticMessage()">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 3. SOCRATIC MENTOR DIRECT CHAT VIEW -->
+      <div id="view-chat" class="view-panel">
+        <header class="view-header">
+          <h1 class="view-title">Socratic Mentor Agent</h1>
+          <p class="view-subtitle">Guiding your understanding step-by-step. Choose a lesson to start a dialogue.</p>
+        </header>
+        
+        <div class="glass-card" style="height: calc(100vh - 200px); display: flex; flex-direction: column;">
+          <div class="chat-panel" id="mentor-chat-wrapper">
+            <div class="timeline-placeholder" id="chat-placeholder-content">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+              <h3>No Dialogue Initialized</h3>
+              <p style="margin-top: 8px;">Please open a roadmap in the **Curriculum Planner** and select a lesson to initiate Socratic conversations.</p>
+              <button class="btn" style="margin-top: 16px;" onclick="app.switchView('planner')">Go to Planner</button>
+            </div>
+            
+            <div class="hidden" id="chat-active-content" style="display: flex; flex-direction: column; height: 100%;">
+              <div class="section-header" style="border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 16px;">
+                <div>
+                  <span id="chat-mentor-context-lesson" style="font-weight: 700;">Lesson Context: Variables</span>
+                  <span id="chat-mentor-context-course" style="display: block; font-size: 0.75rem; color: var(--text-secondary); margin-top: 2px;">Course: Intro to Python</span>
+                </div>
+                <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.75rem;" onclick="app.switchView('reader')">Open Lesson Text</button>
+              </div>
+              
+              <div class="chat-messages" id="direct-chat-messages-box">
+                <!-- Bubbles -->
+              </div>
+              
+              <div class="chat-input-area">
+                <input type="text" id="direct-chat-input-box" class="chat-input" placeholder="Ask Socrates a question..." onkeydown="if(event.key === 'Enter') app.sendDirectSocraticMessage()">
+                <button class="btn" onclick="app.sendDirectSocraticMessage()">Send Message</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 4. FLASHCARD ARENA VIEW -->
+      <div id="view-flashcards" class="view-panel">
+        <header class="view-header">
+          <h1 class="view-title">Spaced Repetition Flashcards</h1>
+          <p class="view-subtitle">Review core conceptual flashcards generated dynamically from your studies.</p>
+        </header>
+        
+        <div class="glass-card" style="min-height: 480px; display: flex; flex-direction: column; justify-content: center;">
+          <div class="timeline-placeholder" id="flashcards-placeholder">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+            <h3>No Flashcard Decks Built</h3>
+            <p style="margin-top: 8px;">Study lessons in your roadmap. The Spaced Repetition Agent will extract key card concepts automatically.</p>
+          </div>
+          
+          <div class="hidden flashcards-layout" id="flashcards-active-layout">
+            <div class="card-deck-info">
+              <span id="deck-source-title">Python Variables Deck</span>
+              <span id="deck-card-counter">Card 1 of 4</span>
+            </div>
+            
+            <!-- 3D Flashcard element -->
+            <div class="flashcard-3d" onclick="this.classList.toggle('flipped')">
+              <div class="flashcard-inner">
+                <!-- Front Side -->
+                <div class="flashcard-face flashcard-front">
+                  <span class="flashcard-label">Concept Question</span>
+                  <div class="flashcard-text" id="flashcard-front-text">What is dynamic typing?</div>
+                  <span class="flashcard-instructions">Click to reveal answer</span>
+                </div>
+                <!-- Back Side -->
+                <div class="flashcard-face flashcard-back">
+                  <span class="flashcard-label">Explanatory Answer</span>
+                  <div class="flashcard-text" id="flashcard-back-text" style="font-size: 1.15rem;">A programming language behavior where types are associated with values, not variables at compile time.</div>
+                  <span class="flashcard-instructions">Rate your recall below to organize cards</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Grade Recall Row -->
+            <div class="card-grade-row">
+              <button class="grade-btn need-review" onclick="app.gradeFlashcard(1)">Need Review</button>
+              <button class="grade-btn hard" onclick="app.gradeFlashcard(2)">Hard</button>
+              <button class="grade-btn good" onclick="app.gradeFlashcard(3)">Good</button>
+              <button class="grade-btn easy" onclick="app.gradeFlashcard(4)">Easy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 5. FOCUS SANCTUARY VIEW -->
+      <div id="view-focus" class="view-panel">
+        <header class="view-header">
+          <h1 class="view-title">Focus Sanctuary</h1>
+          <p class="view-subtitle">Immerse yourself in distraction-free studying with a Pomodoro timer and lo-fi soundscapes.</p>
+        </header>
+        
+        <div class="glass-card focus-container">
+          <div class="timer-wheel-container">
+            <!-- Progress Circle -->
+            <svg class="timer-svg" width="260" height="260">
+              <defs>
+                <linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="var(--accent-cyan)" />
+                  <stop offset="100%" stop-color="var(--accent-violet)" />
+                </linearGradient>
+              </defs>
+              <circle class="timer-circle-bg" cx="130" cy="130" r="115" stroke-width="8" fill="transparent" />
+              <circle class="timer-circle-progress" id="pomodoro-progress" cx="130" cy="130" r="115" stroke-width="8" fill="transparent" stroke-dasharray="722.5" stroke-dashoffset="0" />
+            </svg>
+            
+            <!-- Digital Counter -->
+            <div class="timer-digital">
+              <div class="digital-time" id="pomodoro-timer-digits">25:00</div>
+              <div class="timer-label" id="pomodoro-timer-label">Focus Mode</div>
+            </div>
+          </div>
+          
+          <div class="timer-actions">
+            <button class="btn" id="pomodoro-toggle-btn" onclick="app.togglePomodoro()">Start Session</button>
+            <button class="btn btn-secondary" onclick="app.resetPomodoro()">Reset</button>
+          </div>
+          
+          <!-- Soundscape panel -->
+          <div style="width:100%; border-top:1px solid var(--border-color); padding-top:20px;">
+            <div class="soundscape-title">Ambient Soundscapes</div>
+            <div class="soundscape-grid">
+              <div class="soundscape-card active" data-sound="none" onclick="app.setAmbientSound('none')">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/></svg>
+                <span>Mute</span>
+              </div>
+              <div class="soundscape-card" data-sound="binaural" onclick="app.setAmbientSound('binaural')">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
+                <span>Binaural</span>
+              </div>
+              <div class="soundscape-card" data-sound="rain" onclick="app.setAmbientSound('rain')">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                <span>Rain</span>
+              </div>
+              <div class="soundscape-card" data-sound="brownian" onclick="app.setAmbientSound('brownian')">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                <span>Pink Noise</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 6. QUIZ ARENA VIEW -->
+      <div id="view-quiz" class="view-panel">
+        <header class="view-header">
+          <h1 class="view-title">Quiz Arena</h1>
+          <p class="view-subtitle">Test your memory and receive detailed conceptual evaluation from the Assessment Agent.</p>
+        </header>
+        
+        <div class="glass-card quiz-panel" id="quiz-wrapper-card">
+          <div class="timeline-placeholder" id="quiz-placeholder-content">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+            <h3>No Quiz Loaded</h3>
+            <p style="margin-top: 8px;">Quizzes are matched to active lessons. Open an active course in the **Curriculum Planner** and click "Take Quiz" from the lesson reader.</p>
+          </div>
+          
+          <div class="hidden" id="quiz-active-layout">
+            <div class="quiz-header-status">
+              <span id="quiz-subject-title">Variables & Data Types</span>
+              <span id="quiz-question-number">Question 1 of 2</span>
+            </div>
+            
+            <div class="quiz-progress-track">
+              <div class="quiz-progress-fill" id="quiz-progress-fill-bar"></div>
+            </div>
+            
+            <div class="quiz-question" id="quiz-question-text">
+              Which keyword is used to declare a variable in Python?
+            </div>
+            
+            <div class="quiz-options-list" id="quiz-options-container">
+              <!-- Options elements dynamically generated -->
+            </div>
+            
+            <!-- Conceptual explanation box (Assessment Agent feedback) -->
+            <div class="quiz-feedback-box" id="quiz-feedback-block">
+              <div class="feedback-title" id="quiz-feedback-title">Correct!</div>
+              <div class="feedback-text" id="quiz-feedback-text">
+                Python assigns variables dynamically without explicit data keyword declarations.
+              </div>
+            </div>
+            
+            <div style="display: flex; justify-content: flex-end; margin-top: 28px;">
+              <button class="btn" id="quiz-next-action-btn" onclick="app.submitQuizAnswer()">Submit Answer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 7. PROGRESS ANALYTICS VIEW -->
+      <div id="view-analytics" class="view-panel">
+        <header class="view-header">
+          <h1 class="view-title">Progress Analytics</h1>
+          <p class="view-subtitle">Detailed dashboard managed by your Progress Tracker Agent mapping your cognitive masteries.</p>
+        </header>
+        
+        <!-- Numerical stats blocks -->
+        <div class="metric-strip">
+          <div class="glass-card metric-card">
+            <div class="metric-value" id="stats-xp-value">0</div>
+            <div class="metric-label">Total XP Earned</div>
+          </div>
+          <div class="glass-card metric-card">
+            <div class="metric-value" id="stats-lessons-value">0</div>
+            <div class="metric-label">Lessons Completed</div>
+          </div>
+          <div class="glass-card metric-card">
+            <div class="metric-value" id="stats-accuracy-value">0%</div>
+            <div class="metric-label">Quiz Accuracy</div>
+          </div>
+        </div>
+        
+        <div class="analytics-grid">
+          <!-- Study Progress Chart -->
+          <div class="glass-card">
+            <h3 class="section-header">Weekly Activity</h3>
+            <div class="svg-chart-container">
+              <!-- Custom SVG Graph illustrating progress -->
+              <svg width="100%" height="100%" viewBox="0 0 400 200" preserveAspectRatio="none">
+                <!-- Grid Lines -->
+                <line x1="0" y1="50" x2="400" y2="50" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+                <line x1="0" y1="100" x2="400" y2="100" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+                <line x1="0" y1="150" x2="400" y2="150" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+                <!-- Path line representing progress -->
+                <path d="M 10 180 Q 80 150 150 170 T 290 110 T 390 40" fill="none" stroke="url(#chartGrad)" stroke-width="3" stroke-linecap="round"/>
+                <!-- Gradients definition -->
+                <defs>
+                  <linearGradient id="chartGrad" x1="0" y1="0" x2="100" y2="0">
+                    <stop offset="0%" stop-color="var(--accent-cyan)"/>
+                    <stop offset="100%" stop-color="var(--accent-violet)"/>
+                  </linearGradient>
+                </defs>
+                <!-- Interactive dots -->
+                <circle cx="10" cy="180" r="4" fill="var(--accent-cyan)"/>
+                <circle cx="150" cy="170" r="4" fill="var(--accent-cyan)"/>
+                <circle cx="290" cy="110" r="4" fill="var(--accent-violet)"/>
+                <circle cx="390" cy="40" r="4" fill="var(--accent-violet)"/>
+              </svg>
+            </div>
+            <p class="view-subtitle" style="font-size: 0.75rem; text-align: center; margin-top: 8px;">Activity timeline spikes during focus-hour intervals.</p>
+          </div>
+          
+          <!-- Badges cabinet shelf -->
+          <div class="glass-card">
+            <h3 class="section-header">Badge Cabinet</h3>
+            <div class="badge-grid" id="badge-grid-cabinet">
+              <div class="badge-item" id="badge-pioneer">
+                <svg class="badge-icon-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                <div class="badge-title">First Steps</div>
+                <div class="badge-desc">Initialize any custom learning pathway.</div>
+              </div>
+              
+              <div class="badge-item" id="badge-socrates">
+                <svg class="badge-icon-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                <div class="badge-title">Socrates Pupil</div>
+                <div class="badge-desc">Engage in dialogue for over 4 turns.</div>
+              </div>
+              
+              <div class="badge-item" id="badge-academic">
+                <svg class="badge-icon-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 .364l-.707 .707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                <div class="badge-title">Perfect Quiz</div>
+                <div class="badge-desc">Score 100% on any lesson assessment.</div>
+              </div>
+              
+              <div class="badge-item" id="badge-focus">
+                <svg class="badge-icon-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <div class="badge-title">Zen Master</div>
+                <div class="badge-desc">Complete a 25-minute Pomodoro focus interval.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 8. SETTINGS VIEW -->
+      <div id="view-settings" class="view-panel">
+        <header class="view-header">
+          <h1 class="view-title">Settings</h1>
+          <p class="view-subtitle">Configure your connection keys to unlock live Gemini multi-agent generations.</p>
+        </header>
+        
+        <div class="glass-card settings-form">
+          <h3 class="section-header" style="margin-bottom: 8px;">Gemini API Configuration</h3>
+          <p class="view-subtitle" style="font-size: 0.8rem; margin-bottom: 24px;">Your keys are stored entirely in your local browser state and are sent directly to Google's API servers.</p>
+          
+          <div class="form-group">
+            <label class="form-label" for="settings-api-key">Gemini API Key</label>
+            <input type="password" id="settings-api-key" class="form-input" placeholder="AIzaSy...">
+          </div>
+          
+          <button class="btn" style="margin-top: 20px;" onclick="app.saveApiKey()">
+            Save Configuration
+          </button>
+        </div>
+      </div>
+      
+    </main>
+  </div>
+
+  <!-- LEVEL UP POPUP -->
+  <div class="level-up-overlay" id="lvl-up-celeb-overlay">
+    <div class="glass-card celebration-box">
+      <span class="celebration-icon">🎉</span>
+      <h2 class="view-title" style="font-size: 1.75rem; margin-bottom: 8px; color: var(--accent-amber);">Level Up!</h2>
+      <p class="view-subtitle" style="font-size: 1rem; margin-bottom: 16px;">You have advanced to</p>
+      <div class="metric-value" style="font-size: 3rem; color: var(--accent-cyan); margin-bottom: 24px;" id="lvl-up-display-value">Level 2</div>
+      <button class="btn" onclick="app.dismissLevelUp()">Continue Learning</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="agent-engine.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
